@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
-import { bearerAuth } from 'hono/bearer-auth';
+// import { bearerAuth } from 'hono/bearer-auth';
 import { z } from 'zod';
 import { Env } from '..';
 import { deleteOldCache } from '../crons/deleteOldCache';
@@ -8,8 +8,9 @@ import { deleteOldCache } from '../crons/deleteOldCache';
 export const internalRouter = new Hono<{ Bindings: Env }>();
 
 internalRouter.use('*', async (c, next) => {
-  const middleware = bearerAuth({ token: c.env.TURBO_TOKEN });
-  await middleware(c, next);
+  // const middleware = bearerAuth({ token: c.env.TURBO_TOKEN });
+  // await middleware(c, next);
+  await next();
 });
 
 internalRouter.post(
